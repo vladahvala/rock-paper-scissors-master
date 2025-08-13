@@ -43,6 +43,7 @@
   }
 
 
+
   /* MAIN CONTAINER */
   .page-wrapper{
     padding: 2rem;
@@ -52,6 +53,7 @@
     flex-direction: column;
     align-items: center;
   }
+
 
 
   /* HEADER */
@@ -99,6 +101,7 @@
     font-size: 3rem;
     color: #56526b;
   }
+
 
 
   /* GAME SECTION */
@@ -193,6 +196,7 @@
   }
 
 
+
   /* PLAY SECTION */
   .play-section {
     height: 9rem;
@@ -223,82 +227,132 @@
   }
 
   .play-section__circles {
+    column-gap: 6rem;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    column-gap: 6rem; /* збільшив з 5rem до 12rem */
   }
   
-  #you-picked,
-  #house-picked {
+  .play-section--you-picked,
+  .play-section--house-picked{
+    min-height: 15rem;
+    min-width: 15rem; 
+    
     display: flex;
     justify-content: center;
     align-items: center;
-    min-width: 15rem; /* ширина кола */
-    min-height: 15rem;
   }
    
-  #house-picked {
+ .play-section--house-picked {
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+
     opacity: 0;
     transform: scale(0.8);
     transition: opacity 0.6s ease-in, transform 0.6s ease-in;
-    position: absolute; /* поверх пустого */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    position: absolute; 
   } 
+
+  .play-section__pulse-circle {
+    position: absolute;
+    top: 16.125rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    animation: pulse 8s infinite; /* довша анімація */
+  }
+  
+  .play-section__pulse-circle:nth-child(1) {
+    animation-delay: 0s;
+    background-color: #1b2040;
+  }
+  .play-section__pulse-circle:nth-child(2) {
+    animation-delay: 2s; /* друге коло почне через 2 сек після першого */
+    background-color: #222848;
+  }
+  .play-section__pulse-circle:nth-child(3) {
+    animation-delay: 4s; /* третє коло почне через 4 сек */
+    background-color: #292f4f;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.5);
+      opacity: 0;
+    }
+  }
+  
+  
+  
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.5);
+      opacity: 0;
+    }
+  }
   
   #text-you-picked,
   #text-house-picked {
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.6s ease-in, transform 0.6s ease-in;
-    display: inline-block; /* щоб transform працював коректно */
+    display: inline-block;
   }
 
-  .house-slot {
-    position: relative;
-    width: 15rem;
+  .play-section__house-slot{
     height: 15rem;
+    width: 15rem;
+    
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
   
-  #house-picked {
-    position: absolute;
-    top: 130px;
+  .play-section--house-picked {
+    top: 8.125rem;
     left: 0;
+
     display: flex;
     justify-content: center;
     align-items: center;
+    position: absolute;
   }
-  #house-picked-empty {
 
+  .play-section--house-picked-empty {
+    top: 8.125rem;
+    z-index: 5;    
+    
     position: relative;  
     display: flex;
     justify-content: center;
     align-items: center;
-
-    top: 130px;
-    z-index: 5;         
   }
   
   .play-section__empty {
-    width: 12rem;       /* розмір кола */
+    width: 12rem;      
     height: 12rem;
     border-radius: 50%;
     background-color: #16213d;
-    flex-shrink: 0;    /* не дозволяє зменшуватись */
-    
-    opacity: 0;            /* стартова прозорість */
-    transform: scale(0.7); /* трохи зменшене */
-    transition: opacity 0.6s ease, transform 0.6s ease; /* плавне випливання */
+    flex-shrink: 0;   
+
+    opacity: 0;            
+    transform: scale(0.7); 
+    transition: opacity 0.6s ease, transform 0.6s ease; 
   }
   
-  
-
   .game-section__row--bottom{
     margin-top: 8rem;
     column-gap: 5rem;
@@ -315,8 +369,40 @@
     height: 6rem;
   }
 
+  .play-section__results{
+    height: 100%;
+    width: 100%;
 
-  /* ANIMATION */
+    top: 40%;
+
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 0.5rem;
+
+    opacity: 0;            
+    transform: scale(0.7); 
+    transition: opacity 0.6s ease, transform 0.6s ease; 
+
+    position: absolute;
+  }
+
+  .text--result{
+    font-size: 2.5rem;
+    color: white;
+
+    align-self: center;
+  }
+
+  .button--play-again{
+    width: 12rem;
+    padding: 0.7rem;
+    background-color: white;
+    color: red;
+    letter-spacing: 1px;
+    border-radius: 0.5rem;
+  }
 
 
 

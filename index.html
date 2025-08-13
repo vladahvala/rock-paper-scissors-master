@@ -2,36 +2,92 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 
   <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  
+  <script src="assets/js/script.js" defer></script>
   
   <title>Frontend Mentor | Rock, Paper, Scissors</title>
 
-  Score
-  Rules
-
-  You Picked
-  The House Picked
-
-  You Win
-  You Lose
-
-  Play Again
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
   </style>
 </head>
 <body>
 
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+  <div class="rules">
+    <div class="rules__top-row">
+      <span class="text rules--text">RULES</span>
+      <button class="button" id="close-rules"> 
+        <img src="assets/images/icon-close.svg" alt="close-btn">
+      </button>
+    </div>
+    <img src="assets/images/image-rules.svg" alt="rules-img" class="rules__rules-img">
   </div>
+
+  <div class="page-wrapper">
+
+    <div class="header">
+      <div class="header__text">
+        <img src="assets/images/logo.svg" alt="logo-text" class="header__logo-img">
+      </div>
+      <div class="header__score">
+        <div class="text text--score">SCORE</div>
+        <div class="text text--score-num">12</div>
+      </div>
+    </div>
+
+    <div class="game-section">
+      <img src="assets/images/bg-triangle.svg" alt="bg-triangle" id="bg-triangle" class="game-section__bg-triangle">
+      <div class="game-section__circles">
+        <div class="game-section__row game-section__row--top">
+          <div class="game-section__circle-big game-section__circle-big--blue" id="blue-circle-game">
+            <div class="game-section__circle-small">
+              <img src="assets/images/icon-paper.svg" alt="paper-img" class="game-section__icon-img">
+            </div>
+          </div>
+          <div class="game-section__circle-big game-section__circle-big--yellow" id="yellow-circle-game">
+            <div class="game-section__circle-small">
+              <img src="assets/images/icon-scissors.svg" alt="scissors-img" class="game-section__icon-img">
+            </div>
+          </div>
+        </div>
+        <div class="game-section__row game-section__row--top">
+          <div class="game-section__circle-big game-section__circle-big--red" id="red-circle-game">
+            <div class="game-section__circle-small">
+              <img src="assets/images/icon-rock.svg" alt="rock-img" class="game-section__icon-img game-section__icon-img--small">
+            </div>
+          </div>
+        </div>
+      </div>      
+    </div>
+
+    <div class="play-section" >
+      <div class="play-section__picked">
+        <span class="text text--picked" id="text-you-picked">YOU PICKED</span>
+        <span class="text text--picked" id="text-house-picked">THE HOUSE PICKED</span>
+      </div>
+      <div class="play-section__circles">
+        <div id="you-picked" class="game-section__row game-section__row--bottom"></div>
+    
+        <!-- контейнер для вибору комп'ютера -->
+        <div class="house-slot">
+          <div id="house-picked-empty"></div>
+          <div id="house-picked" class="game-section__circle-big"></div>
+        </div>
+    
+      </div>
+    </div>
+    
+
+
+    <button class="button button--rules" id="rules-btn">RULES</button>
+  </div>
+
+
 </body>
 </html>
+

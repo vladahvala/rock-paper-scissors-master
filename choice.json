@@ -1,0 +1,46 @@
+[
+    {
+      "owner": "you",
+      "color": "blue",
+      "icon": "paper",
+      "iconSrc": "assets/images/icon-paper.svg",
+      "alt": "paper-img"
+    },
+    {
+      "owner": "you",
+      "color": "yellow",
+      "icon": "scissors",
+      "iconSrc": "assets/images/icon-scissors.svg",
+      "alt": "scissors-img"
+    },
+    {
+      "owner": "you",
+      "color": "red",
+      "icon": "rock",
+      "iconSrc": "assets/images/icon-rock.svg",
+      "alt": "rock-img"
+    },
+    {
+      "owner": "house",
+      "color": "blue",
+      "icon": "paper",
+      "iconSrc": "assets/images/icon-paper.svg",
+      "alt": "paper-img"
+    },
+    {
+      "owner": "house",
+      "color": "yellow",
+      "icon": "scissors",
+      "iconSrc": "assets/images/icon-scissors.svg",
+      "alt": "scissors-img"
+    },
+    {
+      "owner": "house",
+      "color": "red",
+      "icon": "rock",
+      "iconSrc": "assets/images/icon-rock.svg",
+      "alt": "rock-img"
+    }
+  ]
+  
+  

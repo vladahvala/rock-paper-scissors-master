@@ -226,6 +226,14 @@
     color: white;
   }
 
+  #text-you-picked,
+  #text-house-picked {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+    display: inline-block;
+  }
+
   .play-section__circles {
     column-gap: 6rem;
     display: flex;
@@ -242,6 +250,10 @@
     justify-content: center;
     align-items: center;
   }
+
+  .play-section--you-picked {
+    position: relative; 
+  }
    
  .play-section--house-picked {
     height: 100%;
@@ -251,65 +263,83 @@
 
     opacity: 0;
     transform: scale(0.8);
-    transition: opacity 0.6s ease-in, transform 0.6s ease-in;
+    transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
     position: absolute; 
   } 
 
-  .play-section__pulse-circle {
+  .play-section__user-pulse-circle, 
+  .play-section__house-pulse-circle{
     position: absolute;
-    top: 16.125rem;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 16rem;
-    height: 16rem;
+    transform: translate(-50%, -50%) scale(0);
+    width: 18rem;
+    height: 18rem;
     border-radius: 50%;
-    animation: pulse 8s infinite; /* довша анімація */
-  }
-  
-  .play-section__pulse-circle:nth-child(1) {
-    animation-delay: 0s;
-    background-color: #1b2040;
-  }
-  .play-section__pulse-circle:nth-child(2) {
-    animation-delay: 2s; /* друге коло почне через 2 сек після першого */
-    background-color: #222848;
-  }
-  .play-section__pulse-circle:nth-child(3) {
-    animation-delay: 4s; /* третє коло почне через 4 сек */
-    background-color: #292f4f;
-  }
-  
-  @keyframes pulse {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(2.5);
-      opacity: 0;
-    }
-  }
-  
-  
-  
-  @keyframes pulse {
-    0% {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 0.7;
-    }
-    100% {
-      transform: translate(-50%, -50%) scale(2.5);
-      opacity: 0;
-    }
-  }
-  
-  #text-you-picked,
-  #text-house-picked {
+    animation: pulse 6s infinite;
+    animation-play-state: paused; 
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.6s ease-in, transform 0.6s ease-in;
-    display: inline-block;
+    z-index: -12;
   }
+
+  .play-section__user-pulse-circle {
+    top: 50%;
+  }
+
+  .play-section__house-pulse-circle{
+    top: 16.125rem;
+  }
+  
+  .play-section__house-pulse-circle.active,
+  .play-section__user-pulse-circle.active  {
+    animation-play-state: running; 
+    opacity: 1;
+  }
+  
+  .play-section__house-pulse-circle:nth-child(1),
+  .play-section__user-pulse-circle:nth-child(1) {
+    animation-delay: 0s;
+    background-color: #29325142;
+  }
+  .play-section__house-pulse-circle:nth-child(2),
+  .play-section__user-pulse-circle:nth-child(2) {
+    animation-delay: 1s; 
+    background-color: #2932517a;
+  }
+  .play-section__house-pulse-circle:nth-child(3),
+  .play-section__user-pulse-circle:nth-child(3) {
+    animation-delay: 3s;
+    background-color: #293251b7;
+  }
+  .play-section__house-pulse-circle:nth-child(4),
+  .play-section__user-pulse-circle:nth-child(4) {
+    animation-delay: 4s; 
+    background-color: #293251b7;
+  }
+
+  .play-section__house-pulse-circle.fade-out,
+  .play-section__user-pulse-circle.fade-out {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+
+
+  
+  @keyframes pulse {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+    70% { /* коло ще видно */
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(2.5);
+      opacity: 0;
+    }
+  }
+  
+  
 
   .play-section__house-slot{
     height: 15rem;
@@ -399,7 +429,6 @@
     width: 12rem;
     padding: 0.7rem;
     background-color: white;
-    color: red;
     letter-spacing: 1px;
     border-radius: 0.5rem;
   }

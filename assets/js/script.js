@@ -43,13 +43,55 @@ function createCircleEmpty() {
   return circleBigEmpty;
 }
 
+
+// Getting result of the game
+function getResultByIcon(userCircle, houseCircle) {
+  const user = userCircle.querySelector('img').alt.replace('-img', '');
+  const house = houseCircle.querySelector('img').alt.replace('-img', '');
+
+  if(user === house) return 'draw';
+
+  if(
+    (user === 'rock' && house === 'scissors') ||
+    (user === 'scissors' && house === 'paper') ||
+    (user === 'paper' && house === 'rock')
+  ) return 'win';
+
+  return 'lose';
+}
+
+
 const triangle = document.getElementById('bg-triangle');
 const blueCircle = document.getElementById('blue-circle-game');
 const yellowCircle = document.getElementById('yellow-circle-game');
 const redCircle = document.getElementById('red-circle-game');
 
+
+// Play again btn
+const playAgainBtn = document.querySelector('.button--play-again');
+
+playAgainBtn.addEventListener('click', () => {
+  window.location.reload();
+});
+
+
+
+// Scoring
+const scoreElement = document.querySelector('.text--score-num');
+
+let score = parseInt(localStorage.getItem('score')) || 0;
+scoreElement.textContent = score;
+
+function updateScore(result) {
+  if (result === 'win') score += 1;
+  else if (result === 'lose') score = Math.max(0, score - 1); 
+  localStorage.setItem('score', score);
+  scoreElement.textContent = score;
+}
+
+
 function animatePick(circleElement, color) {
-   
+
   // Creating an empty placeholder instead of circle, so flex-flow is fixed
   const rect = circleElement.getBoundingClientRect();
   const remSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -120,7 +162,7 @@ function animatePick(circleElement, color) {
           // Inserting the player`s choice cirle into play section
           youPicked.innerHTML = '';
           youPicked.appendChild(circleElement);
-  
+
           // Computer chooses circle
           const houseChoices = data.filter(i => i.owner === 'house');
           const houseChoice = houseChoices[Math.floor(Math.random() * houseChoices.length)];
@@ -195,18 +237,55 @@ function animatePick(circleElement, color) {
 
             // Showing resuls 
             setTimeout(() => {
+              const userCircle = circleElement;                 
+              const houseCircle = housePicked.querySelector('.game-section__circle-big'); // <-- змінили тут
+              const result = getResultByIcon(userCircle, houseCircle);
+
+              // Scoring
+              updateScore(result);
+
+              const resultsText = document.querySelector('.play-section__results .text--result');
+
               const resultsSection = document.querySelector('.play-section__results');
               resultsSection.style.display = 'flex';
 
+              const userPulseCircles = circleElement.querySelectorAll('.play-section__user-pulse-circle');
+              const housePulseCircles = document.querySelectorAll('.play-section__house-pulse-circle');
+
+              const playAgain = document.querySelector('.button--play-again');
+
+              if(result === 'win'){
+                resultsText.textContent = 'YOU WON';
+                playAgain.color = '#393c4d';
+
+                for (let i = 0; i < 3; i++) {
+                  const pulse = document.createElement('div');
+                  pulse.className = 'play-section__user-pulse-circle active';
+                  circleElement.parentNode.insertBefore(pulse, circleElement);
+                }
+                
+                userPulseCircles.forEach(circle => {
+                  circle.classList.add('active'); 
+                });
+              }
+              else if(result === 'lose'){
+                 resultsText.textContent = 'YOU LOSE';
+                 playAgain.color = '#bb556b';
+                 
+                 housePulseCircles.forEach(circle => {
+                   circle.classList.add('active'); 
+                 });
+              }
+              else{
+                 resultsText.textContent = 'DRAW';
+              }
+             
               requestAnimationFrame(() => {
                 resultsSection.style.opacity = '1';
                 resultsSection.style.transform = 'scale(1)';
-
               });
             }, 1600);
           }, 2500); 
-
-  
         }).catch(err => console.error('Error loading JSON:', err));
       }, 1000);
     }, 1000);
